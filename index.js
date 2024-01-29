@@ -14,7 +14,7 @@ app.use(express.json())
 
 //Rota inicial
 app.get('/', (req, res) => {
-  res.send('Ola Express')
+  res.json({mensagem: 'Ola Express'})
 })
 
 
