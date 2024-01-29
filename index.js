@@ -59,6 +59,17 @@ app.get('/person', async(req,res)=>{
   }
 })
 
+//Rota GET por ID----------------
+app.get('/person/:id', async(req,res)=>{
+  const id = req.params.id
+  try {
+    const person = await Person.findOne({_id:id})
+    res.status(200).json(person)
+  } catch (error) {
+    res.status(500).json({erro:error})
+  }
+})
+
 //entregando uma porta
 mongoose.connect('mongodb+srv://deUser:NFExiDw0ac2XvlSi@cluster0.vi7idmi.mongodb.net/?retryWrites=true&w=majority')
 .then(()=>{
