@@ -10,7 +10,9 @@ const app = express()
 const Person = require('./models/Person')
 
 //middleWares-------------
-app.use(cors())
+app.use(cors({
+  origin:"*"
+}))
 app.use(
   express.urlencoded({
     extended:true
