@@ -11,7 +11,8 @@ const Person = require('./models/Person')
 
 //middleWares-------------
 app.use(cors({
-  origin:"*"
+  origin: "http://127.0.0.1:5173",
+  methods: ['GET', 'POST', 'PUT', 'DELETE']
 }))
 app.use(
   express.urlencoded({
