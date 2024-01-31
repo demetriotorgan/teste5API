@@ -42,8 +42,9 @@ app.get('/', (req, res) => {
 
 //Post Modo 2
 app.post('/person', async(req,res)=>{
-  const {nome, email} = req.body
+  const {id, nome, email} = req.body
   const person = {
+    id,
     nome,
     email,
   }
@@ -69,7 +70,7 @@ app.get('/person', async(req,res)=>{
 app.get('/person/:id', async(req,res)=>{
   const id = req.params.id
   try {
-    const person = await Person.findOne({_id:id})
+    const person = await Person.findOne({id:id})
       //validando a busca
         if(!person){
           res.status(422).json({message: 'Usuário não encontrado'})
@@ -84,14 +85,14 @@ app.get('/person/:id', async(req,res)=>{
 //rota DELETE --------------
 app.delete('/person/:id', async(req,res)=>{
   const id = req.params.id
-  const person = await Person.findOne({_id:id})
+  const person = await Person.findOne({id:id})
     if(!person){
       res.status(422).json({mensagem: 'Usuario não encontrado'})
       return
     }
 
     try {
-      await Person.deleteOne({_id:id})
+      await Person.deleteOne({id:id})
       res.status(200).json({mensagem:'Usuário excluido com sucesso'})
     } catch (error) {
       res.status(500).json({erro:error})
