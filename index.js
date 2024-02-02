@@ -99,6 +99,29 @@ app.delete('/person/:id', async(req,res)=>{
     }
 })
 
+//rota PATCH
+app.patch('/person/:id', async(req,res)=>{
+  const id = req.params.id
+  const {nome, email} =req.body
+
+  const person ={
+    nome,
+    email,
+  }
+
+  try {
+    const updatePerson = await Person.updateOne({id:id}, person)
+      if(updatePerson.matchedCount === 0){
+        res.status(422).json({mensagem: 'Usuário não atualizado'})
+        return
+      }
+      res.status(200).json(person)
+  } catch (error) {
+    res.status(500).json({erro:error})
+  }
+})
+
+
 //entregando uma porta
 mongoose.connect('mongodb+srv://deUser:NFExiDw0ac2XvlSi@cluster0.vi7idmi.mongodb.net/?retryWrites=true&w=majority')
 .then(()=>{
